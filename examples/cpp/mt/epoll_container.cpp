@@ -118,6 +118,10 @@ class epoll_container : public proton::io::container_impl_base {
     void stop_listening(const std::string& addr) OVERRIDE;
 
     void run() OVERRIDE;
+    void start() PN_CPP_OVERRIDE;
+    void set_timeout(proton::duration timeout) PN_CPP_OVERRIDE;
+    bool process() PN_CPP_OVERRIDE;
+    void wakeup() PN_CPP_OVERRIDE;
     void auto_stop(bool) OVERRIDE;
     void stop(const proton::error_condition& err) OVERRIDE;
 
@@ -505,6 +509,11 @@ void epoll_container::run() {
     if (--threads_ == 0)
         stopped_.notify_all();
 }
+
+void epoll_container::start() {} // FIXME not implemented
+void epoll_container::set_timeout(proton::duration) {} // FIXME not implemented
+bool epoll_container::process() { return false; } // FIXME not implemented
+void epoll_container::wakeup() {} // FIXME not implemented
 
 void epoll_container::auto_stop(bool set) {
     lock_guard g(lock_);

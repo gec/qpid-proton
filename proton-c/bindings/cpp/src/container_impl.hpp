@@ -79,12 +79,17 @@ class container_impl : public standard_container {
     void receiver_options(const proton::receiver_options&) PN_CPP_OVERRIDE;
     class receiver_options receiver_options() const PN_CPP_OVERRIDE { return receiver_options_; }
     void run() PN_CPP_OVERRIDE;
+    void start() PN_CPP_OVERRIDE;
+    void set_timeout(duration timeout) PN_CPP_OVERRIDE;
+    bool process() PN_CPP_OVERRIDE;
+    void wakeup() PN_CPP_OVERRIDE;
     void stop(const error_condition& err) PN_CPP_OVERRIDE;
     void auto_stop(bool set) PN_CPP_OVERRIDE;
 #if PN_CPP_HAS_STD_FUNCTION
     void schedule(duration, std::function<void()>) PN_CPP_OVERRIDE;
 #endif
     void schedule(duration, void_function0&) PN_CPP_OVERRIDE;
+
 
     // non-interface functions
     void configure_server_connection(connection &c);

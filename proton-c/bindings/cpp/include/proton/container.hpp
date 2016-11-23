@@ -110,6 +110,11 @@ class PN_CPP_CLASS_EXTERN container {
     /// With a multithreaded container, call run() in multiple threads to create a thread pool.
     virtual void run() = 0;
 
+    virtual void start() = 0;
+    virtual void set_timeout(duration timeout) = 0;
+    virtual bool process() = 0;
+    virtual void wakeup() = 0;
+
     /// If true, stop the container when all active connections and listeners are closed.
     /// If false the container will keep running till stop() is called.
     ///
@@ -286,6 +291,10 @@ class container_ref : public container {
     void stop_listening(const std::string& url) { impl_->stop_listening(url); }
     ///@endcond
     void run() { impl_->run(); }
+    void start() { impl_->start(); }
+    void set_timeout(duration timeout) { impl_->set_timeout(timeout); }
+    bool process() { return impl_->process(); }
+    void wakeup() { impl_->wakeup(); }
     void auto_stop(bool set) { impl_->auto_stop(set); }
 
     ///@copydoc container::stop

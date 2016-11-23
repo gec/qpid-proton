@@ -352,6 +352,22 @@ void container_impl::run() {
     } while (!auto_stop_);
 }
 
+void container_impl::start() {
+    reactor_.start();
+}
+
+void container_impl::set_timeout(duration timeout) {
+    reactor_.timeout(timeout);
+}
+
+bool container_impl::process() {
+    return reactor_.process();
+}
+
+void container_impl::wakeup() {
+    reactor_.wakeup();
+}
+
 void container_impl::stop(const error_condition&) {
     reactor_.stop();
     auto_stop_ = true;

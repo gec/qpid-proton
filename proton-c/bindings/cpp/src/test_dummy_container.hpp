@@ -45,6 +45,10 @@ class dummy_container : public standard_container {
     listener listen(const std::string& , listen_handler& ) { throw fail; }
     void stop_listening(const std::string&) { throw fail; }
     void run() { throw fail; }
+    void start() { throw fail; }
+    void set_timeout(duration) { throw fail; }
+    bool process() { throw fail; }
+    void wakeup() { throw fail; }
     void auto_stop(bool) { throw fail; }
     void stop(const proton::error_condition& ) { throw fail; }
     returned<sender> open_sender(const std::string &, const proton::sender_options &, const connection_options&) { throw fail; }
